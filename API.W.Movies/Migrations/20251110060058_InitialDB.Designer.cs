@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.W.Movies.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251023050504_InitialDB")]
+    [Migration("20251110060058_InitialDB")]
     partial class InitialDB
     {
         /// <inheritdoc />
@@ -33,10 +33,10 @@ namespace API.W.Movies.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

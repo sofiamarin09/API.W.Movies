@@ -24,13 +24,14 @@ namespace API.W.Movies.Repository
         public async Task<bool> CategoryExistsByNameAsync(string name)
         {
             return await _context.Categories
-            .AsNoTracking()
+            .AsNoTracking() 
             .AnyAsync(c => c.Name == name);
         }
 
         public async Task<bool> CreateCategoryAsync(Category category)
         {
-            category.CreatedAt = DateTime.UtcNow;
+            category.CreatedDate = DateTime.UtcNow;
+            
             await _context.Categories.AddAsync(category);
             return await SaveAsync(); //SQL INSERT = SaveChangesAsync()
 
@@ -53,10 +54,12 @@ namespace API.W.Movies.Repository
    
         public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            return await _context.Categories
+            var categories = await _context.Categories
             .AsNoTracking()
             .OrderBy(c => c.Name)
             .ToListAsync();
+
+            return categories;
         }
 
         public async Task<Category> GetCategoryAsync(int id) //async y await
